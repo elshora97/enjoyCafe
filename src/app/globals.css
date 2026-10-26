@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/* ── Enjoy design tokens (from the approved design system) ───────────── */
+@theme {
+  --color-forest: #032821; /* logo background */
+  --color-smile: #fed906;  /* logo yellow */
+  --color-cream: #fbf6e9;
+  --color-sand: #f3ebd6;
+  --color-leaf: #1b5a40;
+  --color-ink: #141a16;
+  --color-muted: #3d4a43;
+  --color-online: #3ddc84;
+
+  --font-display: var(--font-alexandria-ar), var(--font-alexandria-la), system-ui, sans-serif;
+  --font-sans: var(--font-readex-ar), var(--font-readex-la), system-ui, sans-serif;
+  --font-latin: var(--font-bricolage), system-ui, sans-serif;
+
+  --animate-marquee: marquee 28s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(50%); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 110px; /* keeps anchors clear of the sticky navbar */
+  }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-smile);
+    outline-offset: 3px;
+  }
+}
+
+/* ── Glass surfaces ──────────────────────────────────────────────────── */
+@layer components {
+  .glass-dark {
+    background: rgb(3 40 33 / 0.72);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgb(251 246 233 / 0.22);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.18), 0 12px 40px rgb(0 0 0 / 0.25);
+  }
+  .glass-dark-soft {
+    background: rgb(3 40 33 / 0.38);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid rgb(251 246 233 / 0.25);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.2), 0 24px 60px rgb(0 0 0 / 0.3);
+  }
+  .glass-light {
+    background: rgb(251 246 233 / 0.72);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    backdrop-filter: blur(22px) saturate(170%);
+    border: 1px solid rgb(255 255 255 / 0.65);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.8), 0 16px 40px rgb(3 40 33 / 0.18);
+  }
+  .glass-frost {
+    background: linear-gradient(135deg, rgb(251 246 233 / 0.16), rgb(251 246 233 / 0.05));
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    backdrop-filter: blur(22px) saturate(150%);
+    border: 1px solid rgb(251 246 233 / 0.24);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.22), 0 30px 80px rgb(0 0 0 / 0.3);
+  }
+
+  /* Browsers without backdrop-filter get solid, readable surfaces instead. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass-dark, .glass-dark-soft { background: rgb(3 40 33 / 0.95); }
+    .glass-frost { background: rgb(3 40 33 / 0.85); }
+    .glass-light { background: rgb(251 246 233 / 0.96); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
