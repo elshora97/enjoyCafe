@@ -34,7 +34,7 @@ export default function HomePage() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <HeroMedia poster={heroPoster} caption="Happy Thursday from ur favourite cafe">
         <span className="inline-flex items-center gap-2 self-start rounded-full border border-cream/30 bg-cream/16 px-3 py-1.5 text-[13px] font-semibold md:hidden">
-          <span aria-hidden className="size-2 rounded-full bg-online" /> مفتوحين 24 ساعة
+          <span aria-hidden className="size-2 rounded-full bg-online" /> 24 ساعة
         </span>
         <h1 id="hero-title" className="font-display text-[54px] font-extrabold leading-[1.1] md:text-[clamp(56px,7vw,108px)] md:leading-[1.08]">
           <span className="block">ابدأ يومك</span>
@@ -55,7 +55,7 @@ export default function HomePage() {
           </Link>
         </div>
         <ul className="hidden flex-wrap gap-2.5 text-[15px] md:flex">
-          {["مفتوحين 24 ساعة", "قعدة · تيك أواي · دليفري", "جنب البنك الأهلي"].map((t) => (
+          {["24 ساعة", "قعدة · تيك أواي · دليفري", "جنب البنك الأهلي"].map((t) => (
             <li key={t} className="rounded-full border border-cream/30 bg-cream/14 px-3.5 py-2 backdrop-blur-md">{t}</li>
           ))}
         </ul>

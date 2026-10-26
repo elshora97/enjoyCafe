@@ -23,7 +23,7 @@ export const site = {
   },
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Enjoy+Cafe+Kafr+El+Zayat",
 
-  hoursAr: "مفتوحين 24 ساعة، كل يوم",
+  hoursAr: "24 ساعة، كل يوم",
   open24h: true,
   servicesAr: ["قعدة في المحل", "تيك أواي", "دليفري"],
   priceRange: "££",

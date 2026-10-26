@@ -9,7 +9,7 @@ import counter from "@/assets/images/counter.jpg";
 
 export const metadata: Metadata = {
   title: "زورنا",
-  description: "عنوان كافيه انچوي: طريق طنطا الزراعي، بجوار البنك الأهلي المصري — كفر الزيات. مفتوحين 24 ساعة.",
+  description: "عنوان كافيه انچوي: طريق طنطا الزراعي، بجوار البنك الأهلي المصري — كفر الزيات. 24 ساعة.",
   alternates: { canonical: "/visit" },
 };
 
