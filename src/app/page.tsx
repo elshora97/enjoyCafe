@@ -3,7 +3,7 @@ import Link from "next/link";
 import { HeroMedia } from "@/components/hero-media";
 import { ArrowIcon, ChatIcon, ClockIcon, FacebookIcon, InstagramIcon, PhoneIcon, PinIcon, PlayIcon, Smile } from "@/components/icons";
 import { contactLink, site } from "@/data/site";
-import { formatPrice, menu } from "@/data/menu";
+import { findItem, formatPrice, startingPrice } from "@/data/menu";
 
 import heroPoster from "@/assets/images/hero-poster.jpg";
 import smoothie from "@/assets/images/smoothie.jpg";
@@ -20,8 +20,11 @@ import sparkling from "@/assets/images/sparkling.jpg";
 
 export const metadata = { alternates: { canonical: "/" } };
 
-const price = (id: string) =>
-  formatPrice(menu.flatMap((c) => c.items).find((i) => i.id === id)?.price ?? null);
+const price = (id: string) => formatPrice(findItem(id)?.price);
+const from = (categoryId: string) => {
+  const p = formatPrice(startingPrice(categoryId));
+  return p && `من ${p}`;
+};
 
 const eyebrow = "font-latin text-sm font-semibold uppercase tracking-[0.14em]";
 const h2 = "font-display text-[clamp(32px,4.4vw,60px)] font-extrabold leading-[1.15] text-forest";
@@ -92,21 +95,21 @@ export default function HomePage() {
             <Photo src={smoothie} alt="سموزي بطيخ وفراولة وكريز ونعناع في كوباية Enjoy" fill sizes="(min-width: 768px) 60vw, 280px" className="object-cover object-[30%_60%] md:object-[70%_50%]" />
             <div className="glass-light relative m-3 flex w-full flex-col gap-1.5 rounded-[20px] p-4 md:m-5 md:max-w-[440px] md:gap-2 md:rounded-3xl md:p-[26px]">
               <span className="hidden self-start rounded-full bg-forest px-3 py-1 text-[13px] font-semibold text-smile md:inline">سموزي</span>
-              <h3 className="font-display text-[19px] font-extrabold leading-snug text-forest md:text-[28px]">سموزي بطيخ، فراولة، كريز ونعناع</h3>
-              <p dir="ltr" lang="en" className="hidden text-end font-latin text-sm font-semibold text-muted md:block">Watermelon Strawberry Cherry &amp; Mint Smoothie</p>
+              <h3 className="font-display text-[19px] font-extrabold leading-snug text-forest md:text-[28px]">سموزي فريش</h3>
+              <p dir="ltr" lang="en" className="hidden text-end font-latin text-sm font-semibold text-muted md:block">Fresh smoothies</p>
               <div className="flex items-center justify-between gap-3">
-                <span className="text-[13px] text-muted md:text-[15px]">بطيخ، فراولة، كريز، نعناع فريش</span>
-                <Price value={price("watermelon-smoothie")} />
+                <span className="text-[13px] text-muted md:text-[15px]">مانجا · فراولة · باشون فروت · كولادا</span>
+                <Price value={from("smoothie")} />
               </div>
             </div>
           </article>
 
           <article className="flex h-[420px] w-[280px] shrink-0 snap-start flex-col gap-3 rounded-[28px] bg-smile p-3.5 md:h-auto md:min-h-[560px] md:w-auto md:flex-[1_1_340px] md:gap-[18px] md:rounded-[32px] md:p-6">
             <div className="relative h-[210px] overflow-hidden rounded-[20px] md:h-[250px] md:rounded-[22px]">
-              <Photo src={mojito} alt="باشن فروت موهيتو" fill sizes="(min-width: 768px) 30vw, 250px" className="object-cover object-[28%_62%]" />
+              <Photo src={mojito} alt="موهيتو باشون فروت" fill sizes="(min-width: 768px) 30vw, 250px" className="object-cover object-[28%_62%]" />
             </div>
             <div className="flex flex-col gap-1">
-              <h3 className="font-display text-[22px] font-extrabold text-forest md:text-[28px]">باشن فروت موهيتو</h3>
+              <h3 className="font-display text-[22px] font-extrabold text-forest md:text-[28px]">موهيتو باشون فروت</h3>
               <p dir="ltr" lang="en" className="hidden text-end font-latin text-[15px] font-semibold text-forest md:block">Passion Fruit Mojito</p>
             </div>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm md:text-[15px]">
@@ -114,14 +117,14 @@ export default function HomePage() {
             </ul>
             <div className="mt-auto flex items-center justify-between border-t-2 border-forest pt-3">
               <span className="text-sm font-semibold text-forest md:text-base">موهيتو وصودا</span>
-              <Price value={price("passion-mojito")} dark />
+              <Price value={price("mojito-passion")} dark />
             </div>
           </article>
 
           {[
-            { img: karkadeh, alt: "كوباية كركديه ساقع بالتلج", title: "كركديه", cat: "مشروبات طبيعية", pos: "object-[50%_70%]", id: "karkadeh" },
-            { img: brewEspresso, alt: "إسبريسو بينزل في الكوباية", title: "إسبريسو", cat: "قهوة", pos: "object-[50%_45%]", id: "espresso" },
-            { img: dessert, alt: "طبق حلو بالتين والفستق", title: "حلويات انچوي", cat: "ريد فيلفيت · مولتن كيك · سينابون", pos: "object-[50%_78%]", id: "" },
+            { img: sparkling, alt: "مشروب فوار بالتلج", title: "كوكتيل صودا", cat: "بلو هاواوي · بينا كولادا", pos: "object-[50%_55%]", value: from("soda") },
+            { img: brewEspresso, alt: "إسبريسو بينزل في الكوباية", title: "إسبريسو", cat: "قهوة", pos: "object-[50%_45%]", value: price("espresso") },
+            { img: dessert, alt: "طبق حلو بالتين والفستق", title: "حلويات و وافل", cat: "مولتن كيك · وافل · بان كيك", pos: "object-[50%_78%]", value: from("dessert") },
           ].map((c) => (
             <article key={c.title} className="flex h-[420px] w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[28px] border border-forest/12 bg-white md:h-auto md:w-auto md:flex-[1_1_300px]">
               <div className="relative min-h-0 flex-1 md:h-[280px] md:flex-none">
@@ -131,7 +134,7 @@ export default function HomePage() {
                 <h3 className="font-display text-xl font-bold text-forest md:text-2xl">{c.title}</h3>
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-[15px] text-muted">{c.cat}</span>
-                  {c.id && <Price value={price(c.id)} />}
+                  <Price value={c.value} />
                 </div>
               </div>
             </article>

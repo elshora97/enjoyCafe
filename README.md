@@ -31,14 +31,15 @@ Requires Node.js 20.9 or newer.
 | Navbar / footer / mobile quick bar | `src/components/site-header.tsx`, `site-footer.tsx`, `quick-actions.tsx` |
 
 ### Adding prices
-In `src/data/menu.ts`, set `price` on each item (a number in EGP):
+The whole printed menu lives in `src/data/menu.ts`. Each line is one item:
 
 ```ts
-{ id: "espresso", nameAr: "إسبريسو", nameEn: "Espresso", price: 45, ... }
+i("espresso", "إسبريسو", 35, { priceDouble: 45 }),   // single / double
+i("cheesecake", "تشيز كيك", 90, { note: "كراميل – شوكليت – توت – فراولة" }),
 ```
 
-Prices are shown in Arabic numerals with "ج.م" automatically. `price: null` hides the price.
-Items marked `draft: true` are hidden until their real name is filled in.
+Change the number to change the price; add or delete a line to add or remove an item.
+Prices show in Arabic numerals. `draft: true` hides an item.
 
 ### Phone / WhatsApp
 In `src/data/site.ts` set `phone` and/or `whatsapp` (digits with country code, e.g. `"201001234567"`).

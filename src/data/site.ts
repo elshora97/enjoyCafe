@@ -29,8 +29,8 @@ export const site = {
   priceRange: "££",
 
   /** Egyptian number with country code, digits only, e.g. "201001234567". */
-  phone: null as string | null,
-  whatsapp: null as string | null,
+  phone: "201035567023" as string | null, // 01035567023 — from the printed menu
+  whatsapp: "201035567023" as string | null, // same number as the phone
   email: "mokhaled015@gmail.com",
 
   social: {
